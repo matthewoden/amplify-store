@@ -1,0 +1,16 @@
+{
+  "name": "amplify-store",
+  "version": "0.0.1",
+  "description": "A node wrapper around amplify.store, to handle cookies in a commonjs style.",
+  "main": "amplify.store.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "amplifyjs",
+    "amplify",
+    "amplify.store"
+  ],
+  "author": "Matthew Potter",
+  "license": "ISC"
+}
