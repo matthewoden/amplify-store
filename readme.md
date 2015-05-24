@@ -9,8 +9,10 @@ npm install amplify-store
 
 ## Usage
 
-Most of this can be found on the official (amplify.store docs)[http://amplifyjs.com/api/store/]. However, this is built around node API, so the methods below assume you've required the file as per the following:
-``` var store = require('amplify-store'); ```
+Most of this can be found on the official (amplify.store docs)[http://amplifyjs.com/api/store/]. As this is built around the node API, so the methods below assume you've required the file as per the following:
+``` 
+var store = require('amplify-store'); 
+```
 
 ### Methods
 
