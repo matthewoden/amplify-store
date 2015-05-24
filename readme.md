@@ -9,12 +9,13 @@ npm install amplify-store
 
 ## Usage
 
-Most of this can be found on the official amplify docs. But for a quick reference on store methods, see below.
-
-This is built around node API, so the methods below assume you've required the file as per the following:
+Most of this can be found on the official (amplify.store docs)[http://amplifyjs.com/api/store/]. However, this is built around node API, so the methods below assume you've required the file as per the following:
 ``` var store = require('amplify-store'); ```
 
 ### Methods
+
+If you've never used amplify.store before, it's really just one method. The arguments provided determines the functionality (fetching, setting, clearing, etc).
+
 ``` 
 store( string key, mixed value [, hash options ] ) 
 ```
@@ -103,7 +104,6 @@ Support for the following storage types are built into amplify.store and are det
 ## Examples
 Store data with amplify storage picking the default storage technology:
 ```javascript
-
 var store = require('amplify-store');
 store( "storeExample1", { foo: "bar" } );
 store( "storeExample2", "baz" );
@@ -122,9 +122,10 @@ myStoredValues.storeExample2; // baz
 
 Store data explicitly with session storage
 
-```
-amplify.store.sessionStorage( "explicitExample", { foo2: "baz" } );
+```javascript
+var store = require('amplify-store');
+store.sessionStorage( "explicitExample", { foo2: "baz" } );
 // retrieve the data later via the key
-var myStoredValue2 = amplify.store.sessionStorage( "explicitExample" );
+var myStoredValue2 = store.sessionStorage( "explicitExample" );
 myStoredValue2.foo2; // baz
 ```
