@@ -8,9 +8,9 @@
  *
  * http://amplifyjs.com
  */
-(function( amplify, undefined ) {
 
-var store = amplify.store = function( key, value, options ) {
+
+var store = function( key, value, options ) {
   var type = store.type;
   if ( options && options.type && options.type in store.types ) {
     type = options.type;
@@ -296,6 +296,4 @@ if ( !store.types.localStorage && window.globalStorage ) {
   });
 }() );
 
-}( this.amplify = this.amplify || {} ) );
-
-module.exports = amplify.store;
+module.exports = store;

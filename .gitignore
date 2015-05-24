@@ -1,0 +1,19 @@
+npm-debug.log
+
+# Windows image file caches
+Thumbs.db
+thumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Mac detritus
+.DS_Store
+
+*.tmp
+.tmp/*
+
+*~
