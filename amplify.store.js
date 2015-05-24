@@ -10,7 +10,7 @@
  */
 
 
-var store = function( key, value, options ) {
+ var store = function( key, value, options ) {
   var type = store.type;
   if ( options && options.type && options.type in store.types ) {
     type = options.type;
@@ -40,8 +40,8 @@ var rprefix = /^__amplify__/;
 function createFromStorageInterface( storageType, storage ) {
   store.addType( storageType, function( key, value, options ) {
     var storedValue, parsed, i, remove,
-      ret = value,
-      now = (new Date()).getTime();
+    ret = value,
+    now = (new Date()).getTime();
 
     if ( !key ) {
       ret = {};
@@ -94,7 +94,7 @@ function createFromStorageInterface( storageType, storage ) {
         try {
           storage.setItem( key, parsed );
         // quota exceeded
-        } catch( error ) {
+      } catch( error ) {
           // expire old data and try again
           store[ storageType ]();
           try {
@@ -118,16 +118,18 @@ for ( var webStorageType in { localStorage: 1, sessionStorage: 1 } ) {
     // Safari 5 in Private Browsing mode exposes localStorage
     // but doesn't allow storing data, so we attempt to store and remove an item.
     // This will unfortunately give us a false negative if we're at the limit.
-    window[ webStorageType ].setItem( "__amplify__", "x" );
-    window[ webStorageType ].removeItem( "__amplify__" );
-    createFromStorageInterface( webStorageType, window[ webStorageType ] );
+    if(typeof window !== 'undefined') {
+      window[ webStorageType ].setItem( "__amplify__", "x" );
+      window[ webStorageType ].removeItem( "__amplify__" );
+      createFromStorageInterface( webStorageType, window[ webStorageType ] );
+    }
   } catch( e ) {}
 }
 
 // globalStorage
 // non-standard: Firefox 2+
 // https://developer.mozilla.org/en/dom/storage#globalStorage
-if ( !store.types.localStorage && window.globalStorage ) {
+if (typeof window !== 'undefined' && !store.types.localStorage && window.globalStorage ) {
   // try/catch for file protocol in Firefox
   try {
     createFromStorageInterface( "globalStorage",
@@ -148,13 +150,13 @@ if ( !store.types.localStorage && window.globalStorage ) {
   // IE 9 has quirks in userData that are a huge pain
   // rather than finding a way to detect these quirks
   // we just don't register userData if we have localStorage
-  if ( store.types.localStorage ) {
+  if ( store.types.localStorage || typeof window == 'undefined' ) {
     return;
   }
 
   // append to html instead of body so we can do this from the head
   var div = document.createElement( "div" ),
-    attrKey = "amplify";
+  attrKey = "amplify";
   div.style.display = "none";
   document.getElementsByTagName( "head" )[ 0 ].appendChild( div );
 
@@ -173,8 +175,8 @@ if ( !store.types.localStorage && window.globalStorage ) {
   store.addType( "userData", function( key, value, options ) {
     div.load( attrKey );
     var attr, parsed, prevValue, i, remove,
-      ret = value,
-      now = (new Date()).getTime();
+    ret = value,
+    now = (new Date()).getTime();
 
     if ( !key ) {
       ret = {};
@@ -228,7 +230,7 @@ if ( !store.types.localStorage && window.globalStorage ) {
     try {
       div.save( attrKey );
     // quota exceeded
-    } catch ( error ) {
+  } catch ( error ) {
       // roll the value back to the previous value
       if ( prevValue === null ) {
         div.removeAttribute( key );
@@ -259,7 +261,7 @@ if ( !store.types.localStorage && window.globalStorage ) {
 // fallback for all browsers to enable the API even if we can't persist data
 (function() {
   var memory = {},
-    timeout = {};
+  timeout = {};
 
   function copy( obj ) {
     return obj === undefined ? undefined : JSON.parse( JSON.stringify( obj ) );
