@@ -15,30 +15,51 @@ This is built around node API, so the methods below assume you've required the f
 ``` var store = require('amplify-store'); ```
 
 ### Methods
-``` store( string key, mixed value [, hash options ] ) ```
+``` 
+store( string key, mixed value [, hash options ] ) 
+```
 Stores a value for a given key using the default storage type.
 
-**key**: Identifier for the value being stored.
-**value**: The value to store. The value can be anything that can be serialized as JSON.
-**[options]**: A set of key/value pairs that relate to settings for storing the value.
+- **key**: Identifier for the value being stored.
+- **value**: The value to store. The value can be anything that can be serialized as JSON.
+- **[options]**: A set of key/value pairs that relate to settings for storing the value.
 
-``` store( string key ); ```
+
+``` 
+store( string key ); 
+```
 Gets a stored value based on the key.
 
-``` store(); ```
+
+``` 
+store();
+```
 Gets a hash of all stored values.
 
-``` store( string key, null ); ```
+
+```
+store( string key, null ); 
+```
 Clears key/value pair from the store.
 
-``` store.storageType( string key, mixed value [, hash options ] ); ```
+
+``` 
+store.storageType( string key, mixed value [, hash options ] );
+```
 Stores a value for a given key using an explicit storage type, where storageType is one of the available storage types through amplify.store. The storage types available by default are listed below.
 
-``` store.storageType( string key ) ```
+
+``` 
+store.storageType( string key ) 
+```
 Gets a stored value based upon key for the explicit storage type.
 
-``` store.storageType() ```
+
+``` 
+store.storageType() 
+```
 Gets a hash of all stored values which were stored through amplify.store.
+
 
 ### Options
 
