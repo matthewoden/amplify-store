@@ -1,8 +1,8 @@
 {
   "name": "amplify-store",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "A node wrapper around amplify.store, to handle cookies in a commonjs style.",
-  "main": "amplify.store.js",
+  "main": "amplify.store.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
