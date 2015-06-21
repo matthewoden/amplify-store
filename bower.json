@@ -1,0 +1,26 @@
+{
+  "name": "amplify-store",
+  "version": "0.0.4",
+  "homepage": "https://github.com/matthewoden/amplify-store",
+  "authors": [
+    "Matthew Potter <heymatthewoden@gmail.com>"
+  ],
+  "description": "A node wrapper around amplify.store, to handle cookies in a commonjs style.",
+  "main": "amplify.store.min.js",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "amplifyjs",
+    "amplify",
+    "amplify.store"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
