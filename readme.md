@@ -5,21 +5,25 @@ A very, very basic node wrapper around the amplify.js store module, to set and f
 ```
 npm install amplify-store
 ```
+or
+```
+bower install amplify-store
+```
 
 
 ## Usage
 
 Most of this can be found on the official [amplify docs](http://amplifyjs.com/api/store/). But, as this is built around the node API, so the methods below assume you've required the file as per the following:
-``` 
-var store = require('amplify-store'); 
+```
+var store = require('amplify-store');
 ```
 
 ### Methods
 
 If you've never used amplify.store before, it's really just one method. The arguments provided determines the functionality (fetching, setting, clearing, etc).
 
-``` 
-store( string key, mixed value [, hash options ] ) 
+```
+store( string key, mixed value [, hash options ] )
 ```
 Stores a value for a given key using the default storage type.
 
@@ -28,38 +32,38 @@ Stores a value for a given key using the default storage type.
 - **[options]**: A set of key/value pairs that relate to settings for storing the value.
 
 
-``` 
-store( string key ); 
+```
+store( string key );
 ```
 Gets a stored value based on the key.
 
 
-``` 
+```
 store();
 ```
 Gets a hash of all stored values.
 
 
 ```
-store( string key, null ); 
+store( string key, null );
 ```
 Clears key/value pair from the store.
 
 
-``` 
+```
 store.storageType( string key, mixed value [, hash options ] );
 ```
 Stores a value for a given key using an explicit storage type, where storageType is one of the available storage types through amplify.store. The storage types available by default are listed below.
 
 
-``` 
-store.storageType( string key ) 
+```
+store.storageType( string key )
 ```
 Gets a stored value based upon key for the explicit storage type.
 
 
-``` 
-store.storageType() 
+```
+store.storageType()
 ```
 Gets a hash of all stored values which were stored through amplify.store.
 
