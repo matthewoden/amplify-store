@@ -37,10 +37,16 @@ store.error = function() {
 };
 
 function isBrowser() {
-  // Must add a check for `window.document` because some environments (like
-  // React Native) provide a polyfill for `window` but not `window.document`,
-  // and thus aren't real browser environments.
-  return typeof window !== 'undefined' && window.document != null;
+  // Must add a more sophisticated check than `typeof window !== 'undefined'`
+  // because some environments (like React Native) provide a polyfill for
+  // `window` but not `window.document`, and thus aren't real browser
+  // environments.
+  // See https://github.com/facebook/fbjs/blob/89ffda59d923183dd34efb2622da0176ccb04d41/src/core/ExecutionEnvironment.js#L14-L18
+  return !!(
+    typeof window !== 'undefined' &&
+    window.document &&
+    window.document.createElement
+  );
 }
 
 var rprefix = /^__amplify__/;
