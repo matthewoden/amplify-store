@@ -36,6 +36,19 @@ store.error = function() {
   return "amplify.store quota exceeded";
 };
 
+function isBrowser() {
+  // Must add a more sophisticated check than `typeof window !== 'undefined'`
+  // because some environments (like React Native) provide a polyfill for
+  // `window` but not `window.document`, and thus aren't real browser
+  // environments.
+  // See https://github.com/facebook/fbjs/blob/89ffda59d923183dd34efb2622da0176ccb04d41/src/core/ExecutionEnvironment.js#L14-L18
+  return !!(
+    typeof window !== 'undefined' &&
+    window.document &&
+    window.document.createElement
+  );
+}
+
 var rprefix = /^__amplify__/;
 function createFromStorageInterface( storageType, storage ) {
   store.addType( storageType, function( key, value, options ) {
@@ -118,7 +131,7 @@ for ( var webStorageType in { localStorage: 1, sessionStorage: 1 } ) {
     // Safari 5 in Private Browsing mode exposes localStorage
     // but doesn't allow storing data, so we attempt to store and remove an item.
     // This will unfortunately give us a false negative if we're at the limit.
-    if(typeof window !== 'undefined') {
+    if(isBrowser()) {
       window[ webStorageType ].setItem( "__amplify__", "x" );
       window[ webStorageType ].removeItem( "__amplify__" );
       createFromStorageInterface( webStorageType, window[ webStorageType ] );
@@ -129,7 +142,7 @@ for ( var webStorageType in { localStorage: 1, sessionStorage: 1 } ) {
 // globalStorage
 // non-standard: Firefox 2+
 // https://developer.mozilla.org/en/dom/storage#globalStorage
-if (typeof window !== 'undefined' && !store.types.localStorage && window.globalStorage ) {
+if (isBrowser() && !store.types.localStorage && window.globalStorage ) {
   // try/catch for file protocol in Firefox
   try {
     createFromStorageInterface( "globalStorage",
@@ -150,7 +163,7 @@ if (typeof window !== 'undefined' && !store.types.localStorage && window.globalS
   // IE 9 has quirks in userData that are a huge pain
   // rather than finding a way to detect these quirks
   // we just don't register userData if we have localStorage
-  if ( store.types.localStorage || typeof window == 'undefined' ) {
+  if ( store.types.localStorage || !isBrowser() ) {
     return;
   }
 
