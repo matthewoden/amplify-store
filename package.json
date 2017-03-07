@@ -1,6 +1,6 @@
 {
   "name": "amplify-store",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "A node wrapper around amplify.store, to handle cookies in a commonjs style.",
   "main": "amplify.store.min.js",
   "scripts": {
